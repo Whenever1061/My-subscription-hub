@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <style>
+    /* Reset and page container */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #0b091a;
+      overflow-x: hidden;
+    }
+
+    /* Fixed full-screen container for the lava blobs */
+    .lava-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* Keeps lava behind page content */
+      overflow: hidden;
+      filter: url('#goo'); /* SVG goo filter applied to all child blobs */
+      background: linear-gradient(180deg, #0b091a 0%, #1a0933 50%, #2a0845 100%);
+    }
+
+    /* Base Blob Properties */
+    .blob {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, #ff007f, #7900ff);
+      border-radius: 50%;
+      opacity: 0.85;
+      will-change: transform;
+    }
+
+    /* Anchored Top/Bottom Pooling Waves */
+    .blob.bottom-pool {
+      bottom: -60px;
+      left: -10%;
+      width: 120vw;
+      height: 140px;
+    }
+
+    .blob.top-pool {
+      top: -60px;
+      left: -10%;
+      width: 120vw;
+      height: 120px;
+    }
+
+    /* Rising/Falling Floating Blobs */
+    .blob.one {
+      width: 280px;
+      height: 280px;
+      left: 10%;
+      bottom: -100px;
+      animation: rise 18s infinite ease-in-out;
+    }
+
+    .blob.two {
+      width: 350px;
+      height: 350px;
+      left: 35%;
+      bottom: -150px;
+      animation: rise 24s infinite ease-in-out 4s;
+    }
+
+    .blob.three {
+      width: 220px;
+      height: 220px;
+      left: 60%;
+      bottom: -80px;
+      animation: rise 16s infinite ease-in-out 8s;
+    }
+
+    .blob.four {
+      width: 300px;
+      height: 300px;
+      left: 80%;
+      bottom: -120px;
+      animation: rise 22s infinite ease-in-out 2s;
+    }
+
+    /* Fullscreen Floating Animation */
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1) translateX(0);
+      }
+      50% {
+        transform: translateY(-105vh) scale(1.2, 0.9) translateX(30px);
+      }
+      100% {
+        transform: translateY(0) scale(0.9, 1.1) translateX(-20px);
+      }
+    }
+
+    /* Content Area styling */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Lava Effect -->
+  <div class="lava-bg">
+    <div class="blob top-pool"></div>
+    <div class="blob bottom-pool"></div>
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+    <div class="blob four"></div>
+  </div>
+
+  <!-- SVG Filter (Hidden from view) -->
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="25" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" 
+          values="1 0 0 0 0  
+                  0 1 0 0 0  
+                  0 0 1 0 0  
+                  0 0 0 30 -12" result="goo" />
+        <feBlend in="SourceGraphic" in2="goo" />
+      </filter>
+    </defs>
+  </svg>
+
+ 
+
+</body>
+</html>
