@@ -8,7 +8,7 @@
 </head>
 <body>
 <canvas id="bgCanvas"></canvas>
-<button aria-expanded="false" aria-label="Open account information" class="account-orb-btn" id="accountHubToggle" onclick="toggleMenu()" title="Account"><span class="account-orb-icon">●</span><span class="account-orb-text">Account</span></button>
+<button aria-expanded="false" aria-label="Open account information" class="account-orb-btn" id="accountHubToggle" onclick="toggleMenu()" title="Account"><span aria-hidden="true" class="account-orb-icon"></span><span class="account-orb-text">Account</span></button>
 <aside class="sidebar" id="sidebar">
 
 <div class="sidebar-content">
@@ -19,9 +19,9 @@
 <p>Local profile · Personal subscription hub</p>
 </div>
 <div class="account-info-stack">
-<div class="account-info-row"><span>Account</span><strong>Primary Account</strong></div>
-<div class="account-info-row"><span>Library</span><strong>YouTube Subscriptions</strong></div>
-<div class="account-info-row"><span>Storage</span><strong>Local Browser</strong></div>
+<button class="account-info-row coming-soon-btn" data-panel-name="Account" type="button"><span>Account</span><strong aria-hidden="true"></strong></button>
+<button class="account-info-row coming-soon-btn" data-panel-name="Library" type="button"><span>Library</span><strong aria-hidden="true"></strong></button>
+<button class="account-info-row coming-soon-btn" data-panel-name="Storage" type="button"><span>Storage</span><strong aria-hidden="true"></strong></button>
 </div>
 <button class="switch-user-btn" type="button">Switch Users</button>
 </div>
@@ -137,6 +137,16 @@
 </div>
 <div class="calendar-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
 <div class="calendar-grid" id="calendarGrid"></div>
+</div>
+</dialog>
+
+<dialog class="coming-soon-dialog" id="comingSoonDialog">
+<div class="coming-soon-shell">
+<div class="coming-soon-icon" aria-hidden="true"></div>
+<span class="account-kicker">PANEL STATUS</span>
+<h2 id="comingSoonTitle">Coming Soon</h2>
+<p id="comingSoonMessage">This area is still being built.</p>
+<button class="coming-soon-close" id="closeComingSoonBtn" type="button">Close</button>
 </div>
 </dialog>
 <script src="main.js"></script>

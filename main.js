@@ -394,3 +394,45 @@ animate(0);
         renderCalendar();
     });
 })();
+
+
+// =========================================================
+// Coming soon launchers
+// =========================================================
+(function () {
+    const comingSoonDialog = document.getElementById('comingSoonDialog');
+    const comingSoonTitle = document.getElementById('comingSoonTitle');
+    const comingSoonMessage = document.getElementById('comingSoonMessage');
+    const closeComingSoonBtn = document.getElementById('closeComingSoonBtn');
+    const launchers = document.querySelectorAll('.coming-soon-btn');
+
+    launchers.forEach((launcher) => {
+        launcher.addEventListener('click', () => {
+            const panelName = launcher.dataset.panelName || 'This panel';
+            if (comingSoonTitle) {
+                comingSoonTitle.textContent = panelName + ' · Coming Soon';
+            }
+            if (comingSoonMessage) {
+                comingSoonMessage.textContent = 'The ' + panelName.toLowerCase() + ' panel is still being built.';
+            }
+            if (comingSoonDialog && !comingSoonDialog.open) {
+                comingSoonDialog.showModal();
+            }
+        });
+    });
+
+    closeComingSoonBtn?.addEventListener('click', () => comingSoonDialog?.close());
+
+    comingSoonDialog?.addEventListener('click', (event) => {
+        const rect = comingSoonDialog.getBoundingClientRect();
+        const clickedInDialog =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+
+        if (!clickedInDialog) {
+            comingSoonDialog.close();
+        }
+    });
+})();
